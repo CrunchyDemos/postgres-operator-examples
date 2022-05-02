@@ -1,7 +1,7 @@
 apiVersion: postgres-operator.crunchydata.com/v1beta1
 kind: PostgresCluster
 metadata:
-  name: hippo
+  name: restore-test
 spec:
   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-ha:centos8-13.4-0
   postgresVersion: 13
@@ -20,6 +20,14 @@ spec:
         dedicated: {}
       repos:
       - name: repo1
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 1Gi
+      - name: repo2
         volume:
           volumeClaimSpec:
             accessModes:
